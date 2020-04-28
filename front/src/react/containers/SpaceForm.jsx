@@ -18,6 +18,8 @@ const SpaceForm = ({ navigation, uploadFiles, addSpace, user, fetchLocalidades, 
   const Rules = TextPrompt(useState(false), useState(""));
   const Descripcion = TextPrompt(useState(false), useState(""));
 
+  console.log(user);
+
   /****************  Geo normalization **************/
 
   const [provincias, setProvincias] = useState([])
@@ -48,7 +50,6 @@ const SpaceForm = ({ navigation, uploadFiles, addSpace, user, fetchLocalidades, 
 
   /**************************************************/
 
-
   const onSubmit = function (form) {
     console.log(region)
     const datosSpace = {
@@ -67,7 +68,7 @@ const SpaceForm = ({ navigation, uploadFiles, addSpace, user, fetchLocalidades, 
       rules: (form["Reglas de Convivencia"] || {}).value,
       observations: (form["Observaciones"] || {}).value,
       description: (form["Descripcion"] || {}).value,
-      userId: user,
+      userId: user.id,
       visible: false,
       location: [],
       photos: (form["Agregar fotos"] || {}).value || [],
@@ -255,7 +256,7 @@ const SpaceForm = ({ navigation, uploadFiles, addSpace, user, fetchLocalidades, 
 };
 
 const mapStateToProps = (state, ownProps) => ({
-  user: state.user.logged.uid,
+  user: state.user.logged,
 
 })
 
